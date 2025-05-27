@@ -146,7 +146,7 @@ def space_ping():
 @app.route("/ACM_Ctf.txt")
 def get_flag():
     # INSECURE in a real CTF - FOR DEMONSTRATION ONLY
-    with open("ACM_Ctf.txt", "r") as f:
+    with open("flag.txt", "r") as f:
         flag = f.read()
     return f"<h1>Congratulations! The flag is: {flag}</h1>"
 
