@@ -97,14 +97,40 @@ def check_password():
     else:
         return "<p>Incorrect password. Try again.</p>"
 
+# @app.route("/space_ping", methods=['POST'])
+# def space_ping():
+#     command = request.form.get('command')
+#     safe_commands = ["ping", "traceroute", "cat"] # Example - not robust
+
+#     # Very basic and INSECURE input filtering
+#     if any(bad_char in command for bad_char in [";", "&", "|", "$", "`"]):
+#         return "<p>That doesn't look very space-like...</p>"
+
+#     try:
+#         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#         stdout, stderr = process.communicate(timeout=5)
+#         output = stdout.decode('utf-8') + stderr.decode('utf-8')
+#         return f"<pre>{output}</pre>"
+#     except subprocess.TimeoutExpired:
+#         return "<p>Space ping timed out!</p>"
+#     except Exception as e:
+#         return f"<p>Error in space: {e}</p>"
+
 @app.route("/space_ping", methods=['POST'])
 def space_ping():
     command = request.form.get('command')
-    safe_commands = ["ping", "traceroute", "cat"] # Example - not robust
 
-    # Very basic and INSECURE input filtering
-    if any(bad_char in command for bad_char in [";", "&", "|", "$", "`"]):
-        return "<p>That doesn't look very space-like...</p>"
+    # Block dangerous shell metacharacters
+    forbidden_chars = [";", "&", "|", "$", "`", ">", "<", "(", ")", "[", "]", "{", "}"]
+
+    if any(char in command for char in forbidden_chars):
+        return "<p>🚫 Command blocked by interstellar firewall.</p>"
+
+    # Allow only a strict whitelist of commands
+    allowed_commands = ["string ACM_Ctf.txt"]  # or any other unique one you decide
+
+    if command not in allowed_commands:
+        return "<p>❌ That command is not allowed in this galaxy.</p>"
 
     try:
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -112,9 +138,10 @@ def space_ping():
         output = stdout.decode('utf-8') + stderr.decode('utf-8')
         return f"<pre>{output}</pre>"
     except subprocess.TimeoutExpired:
-        return "<p>Space ping timed out!</p>"
+        return "<p>⏳ Space ping timed out!</p>"
     except Exception as e:
-        return f"<p>Error in space: {e}</p>"
+        return f"<p>💥 Error in hyperspace: {e}</p>"
+
 
 @app.route("/ACM_Ctf.txt")
 def get_flag():
