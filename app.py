@@ -127,7 +127,7 @@ def space_ping():
         return "<p>🚫 Command blocked by interstellar firewall.</p>"
 
     # Allow only a strict whitelist of commands
-    allowed_commands = ["string ACM_Ctf.txt"]  # or any other unique one you decide
+    allowed_commands = ["dir", "more ACM_Ctf.txt"]  # or any other unique one you decide
 
     if command not in allowed_commands:
         return "<p>❌ That command is not allowed in this galaxy.</p>"
