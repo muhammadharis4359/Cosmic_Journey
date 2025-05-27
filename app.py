@@ -100,7 +100,7 @@ def check_password():
 @app.route("/space_ping", methods=['POST'])
 def space_ping():
     command = request.form.get('command')
-    safe_commands = ["ping", "traceroute"] # Example - not robust
+    safe_commands = ["ping", "traceroute", "cat"] # Example - not robust
 
     # Very basic and INSECURE input filtering
     if any(bad_char in command for bad_char in [";", "&", "|", "$", "`"]):
@@ -119,7 +119,7 @@ def space_ping():
 @app.route("/ACM_Ctf.txt")
 def get_flag():
     # INSECURE in a real CTF - FOR DEMONSTRATION ONLY
-    with open("flag.txt", "r") as f:
+    with open("ACM_Ctf.txt", "r") as f:
         flag = f.read()
     return f"<h1>Congratulations! The flag is: {flag}</h1>"
 
