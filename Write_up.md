@@ -111,7 +111,7 @@ ACM_ctf.txt
 Then, we can try:
 
 ```
-type ACM_ctf.txt
+more ACM_ctf.txt
 ```
 
 This finally displays the **flag**.
@@ -125,24 +125,3 @@ ACMCTF{<REDACTED>}
 ```
 
 *(Replace `<REDACTED>` with the actual flag if allowed to share.)*
-
----
-
-### 🛠️ Tools/Techniques Used
-
-- robots.txt and humans.txt exploration
-- Cookie manipulation via browser dev tools
-- Hidden password discovery via source analysis
-- Command injection testing with input filtering
-- Fallback to allowed Windows command (`dir`, `type`)
-
----
-
-### 💡 Takeaways
-
-This challenge was a fun blend of:
-- Web directory enumeration
-- Cookie-based authentication bypass
-- Command injection under strict filter conditions
-
-The layered “space journey” theme made the challenge narrative engaging while also testing core web exploitation techniques.
